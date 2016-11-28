@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+   <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Commute | Daily Driver</title>
+    
+    <!-- core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/prettyPhoto.css" rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/responsive.css" rel="stylesheet">
+    
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->       
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
+        <script type="text/javascript">
+        function setiFrameSource(){
+            var iFrame = document.getElementById("iFrame");
+            var Url = "https://www.google.com/maps/embed/v1/directions?";
+            var origin = "origin=".concat(document.getElementById("origin").value).concat("&");
+            var destination = "destination=".concat(document.getElementById("destination").value).concat("&");
+            var key = "key=".concat(document.getElementById("key").value);
+            Url = Url.concat( origin, destination, key );
+            iFrame.src= Url;
+        }
+
+        function initialize() {
+          // Create the autocomplete object, restricting the search
+          // to geographical location types.
+          origin = new google.maps.places.Autocomplete(
+              /** @type {HTMLInputElement} */(document.getElementById('origin')),
+              { types: ['geocode'] });
+          destination = new google.maps.places.Autocomplete(
+              /** @type {HTMLInputElement} */(document.getElementById('destination')),
+              { types: ['geocode'] });
+          // When the user selects an address from the dropdown,
+          // populate the address fields in the form.
+          google.maps.event.addListener(origin, 'place_changed', function() {
+            fillInAddress();
+          });
+          google.maps.event.addListener(destination, 'place_changed', function() {
+            fillInAddress();
+          });
+        }
+
+        // [START region_geolocation]
+        // Bias the autocomplete object to the user's geographical location,
+        // as supplied by the browser's 'navigator.geolocation' object.
+        function geolocate() {
+          if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+              var geolocation = new google.maps.LatLng(
+                  position.coords.latitude, position.coords.longitude);
+              var circle = new google.maps.Circle({
+                center: geolocation,
+                radius: position.coords.accuracy
+              });
+              autocomplete.setBounds(circle.getBounds());
+            });
+          }
+        }
+
+</script>
+</head><!--/head-->
+
+
+<body onload="initialize()">
+
+    <header id="header">
+        <div class="top-bar">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 col-xs-4">
+                        <div class="top-number"><p><i class="fa fa-phone-square"></i>  +0123 456 70 90</p></div>
+                    </div>
+                    <div class="col-sm-6 col-xs-8">
+                       <div class="social">
+                            <ul class="social-share">
+                                <li><a href="https://www.facebook.com/Daily-Driver-712553245587584/?skip_nax_wizard=true"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="https://twitter.com/dailydrive16"><i class="fa fa-twitter"></i></a></li>
+
+                            </ul>
+                            
+                       </div>
+                    </div>
+                </div>
+            </div><!--/.container-->
+        </div><!--/.top-bar-->
+
+        <nav class="navbar navbar-inverse" role="banner">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html"><img src="images/logo2.png" alt="logo"></a>
+                </div>
+                
+                <div class="collapse navbar-collapse navbar-right">
+                    <ul class="nav navbar-nav">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about-us.html">About Us</a></li>
+                        <li class="active"><a href="Commute.html">Commute</a></li>
+                          <li><a href="dailycosts.html">Daily Costs</a></li>                      
+                        <li><a href="Meals.html">Meals</a></li>
+                        <li><a href="Tasks.html">Tasks</a></li> 
+                        <li><a href="Sleep.html">Sleep</a></li>                        
+                    </ul>
+                </div>
+            </div><!--/.container-->
+        </nav><!--/nav-->
+        
+    </header><!--/header-->
+
+    <section id="feature" class="transparent-bg">
+        <div class="container">
+           <div class="center wow fadeInDown">
+                <h2>Commute</h2>
+                <p class="lead">Commute helps you find the fasest and most convient way of getting to your desired location</p>
+            
+            <form method="get" target="iFrame">
+        <br><input id="origin" style="width:50%;" placeholder="Starting Point" name="origin" type="text" onFocus="geolocate()"/></br>
+		<br><input id="destination" style="width:50%;" placeholder="Finishing Point" name="destination" type="text" onFocus="geolocate()"/></br>
+		<input id="key" type="hidden" name="key" value="AIzaSyD4iE2xVSpkLLOXoyqT-RuPwURN3ddScAI">
+		<br>
+		<a class="btn btn-primary active" value="Go" onclick="setiFrameSource();">Calculate</a>
+		</br>
+        </form>
+		<br>
+        <iframe id="iFrame" name="iFrame" src="https://www.google.com/maps/embed/v1/directions?origin=Hyderabad&destination=JNTU Busstop&key=AIzaSyD4iE2xVSpkLLOXoyqT-RuPwURN3ddScAI" style="height:500px;width:500px" ></iframe>
+		</br>
+		</div> 
+</div>		
+</section>
+
+
+            
+
+
+
+
+    <footer id="footer" class="midnight-blue">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    &copy; 2013 <a target="_blank" href="http://shapebootstrap.net/" title="Free Twitter Bootstrap WordPress Themes and HTML templates">ShapeBootstrap</a>. All Rights Reserved.
+                </div>
+                <div class="col-sm-6">
+                    <ul class="pull-right">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Faq</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer><!--/#footer-->
+
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.prettyPhoto.js"></script>
+    <script src="js/jquery.isotope.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/wow.min.js"></script>
+</body>
+
+</html>
